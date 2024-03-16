@@ -28,3 +28,4 @@
 /home/chris/Courses/5028 Applications of Software Architecture for Big Data/Final Project/Bored/obj/Debug/net8.0/Bored.pdb
 /home/chris/Courses/5028 Applications of Software Architecture for Big Data/Final Project/Bored/obj/Debug/net8.0/Bored.genruntimeconfig.cache
 /home/chris/Courses/5028 Applications of Software Architecture for Big Data/Final Project/Bored/obj/Debug/net8.0/ref/Bored.dll
+/home/chris/Courses/5028 Applications of Software Architecture for Big Data/Final Project/Bored/obj/Debug/net8.0/Bored.sourcelink.json
