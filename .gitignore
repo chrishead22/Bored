@@ -13,3 +13,11 @@ obj/Debug/net8.0/Bored.sourcelink.json
 obj/Debug/net8.0/ref/Bored.dll
 obj/Debug/net8.0/refint/Bored.dll
 .mono/registry/CurrentUser/software/microsoft/csdevkit/v1/pids/5919_133550984425501687/values.xml
+bin/Debug/net8.0/Bored.dll
+bin/Debug/net8.0/Bored.pdb
+obj/Debug/net8.0/Bored.AssemblyInfo.cs
+obj/Debug/net8.0/Bored.AssemblyInfoInputs.cache
+obj/Debug/net8.0/Bored.dll
+obj/Debug/net8.0/Bored.pdb
+obj/Debug/net8.0/ref/Bored.dll
+obj/Debug/net8.0/refint/Bored.dll
