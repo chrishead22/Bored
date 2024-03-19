@@ -27,6 +27,9 @@ jobs:
         
       - name: Build
         run: dotnet build ./Bored.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test ./Bored.sln --configuration Release --no-restore
         
       - name: Publish
         run: dotnet publish ./Bored.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
