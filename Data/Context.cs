@@ -24,10 +24,8 @@ public partial class Context : DbContext
         {
             if (string.IsNullOrWhiteSpace(_connectionString))
             {
-                string environmentSpecificJsonFile = $"appsettings.{Environment}.json";
                 IConfigurationBuilder configBuilder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile(environmentSpecificJsonFile);
+                .AddJsonFile("appsettings.json");
 
                 IConfiguration configuration = configBuilder.Build();
                 _connectionString = configuration.GetConnectionString("Default");
@@ -38,14 +36,6 @@ public partial class Context : DbContext
         set
         {
             _connectionString = value;
-        }
-    }
-
-    public static string Environment
-    {
-        get
-        {
-            return System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         }
     }
 
