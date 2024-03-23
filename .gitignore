@@ -30,3 +30,4 @@ obj/Debug/net8.0/project.razor.vscode.bin
 .fake
 .mono/registry/CurrentUser/software/microsoft/csdevkit/v1/pids/16024_133552887041196171/values.xml
 .mono/registry/CurrentUser/software/microsoft/csdevkit/v1/pids/2625_133553340410367885/values.xml
+appsettings.Development.json
