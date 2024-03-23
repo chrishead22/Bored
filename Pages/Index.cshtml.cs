@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Models;
 
 namespace Bored.Pages;
 
@@ -14,6 +15,7 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-
+        Context context = new Context();
+        List<Activity> activities = context.Activities.ToList();
     }
 }
