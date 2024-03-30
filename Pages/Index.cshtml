@@ -6,5 +6,55 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome!</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<div class="mt-5">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;">Activity</label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" asp-for="Activity.Description" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;" title="Type of the activity">Type</label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" asp-for="Activity.Type" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;"
+                    title="The number of people that this activity could involve">Participants</label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" asp-for="Activity.Participants" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;"
+                    title="A factor describing the cost of the event with zero being free">Price</label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" asp-for="Activity.Price" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;"
+                    title="A factor describing how possible an event is to do with zero being the most accessible">Accessibility</label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" asp-for="Activity.Accessibility" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript'>
+
+</script>
