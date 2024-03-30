@@ -10,4 +10,4 @@ obj/Debug/net8.0/refint/Bored.dll
 obj/Debug/net8.0/project.razor.vscode.bin
 
 .fake
-.mono/registry/CurrentUser/software/microsoft/csdevkit/v1/pids/*
+.mono/*
