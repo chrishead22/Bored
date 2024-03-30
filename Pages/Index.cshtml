@@ -8,7 +8,8 @@
     <h1 class="display-4">Welcome!</h1>
 </div>
 <div class="mt-5">
-    <div class="col-12">
+    <h4>Current Random Activity to Cure Your Boredom</h4>
+    <div class="col-12 mt-2">
         <div class="row">
             <div class="col-1">
                 <label class="form-control" style="width: 150px;">Activity</label>
@@ -19,7 +20,7 @@
         </div>
         <div class="row">
             <div class="col-1">
-                <label class="form-control" style="width: 150px;" title="Type of the activity">Type</label>
+                <label class="form-control" style="width: 150px;" title="Type of the activity"><u>Type</u></label>
             </div>
             <div class="col-11">
                 <input class="form-control" asp-for="Activity.Type" />
@@ -28,7 +29,7 @@
         <div class="row">
             <div class="col-1">
                 <label class="form-control" style="width: 150px;"
-                    title="The number of people that this activity could involve">Participants</label>
+                    title="The number of people that this activity could involve"><u>Participants</u></label>
             </div>
             <div class="col-11">
                 <input class="form-control" asp-for="Activity.Participants" />
@@ -37,7 +38,7 @@
         <div class="row">
             <div class="col-1">
                 <label class="form-control" style="width: 150px;"
-                    title="A factor describing the cost of the event with zero being free">Price</label>
+                    title="A factor describing the cost of the event with zero being free"><u>Price</u></label>
             </div>
             <div class="col-11">
                 <input class="form-control" asp-for="Activity.Price" />
@@ -46,13 +47,62 @@
         <div class="row">
             <div class="col-1">
                 <label class="form-control" style="width: 150px;"
-                    title="A factor describing how possible an event is to do with zero being the most accessible">Accessibility</label>
+                    title="A factor describing how possible an event is to do with zero being the most accessible"><u>Accessibility</u></label>
             </div>
             <div class="col-11">
                 <input class="form-control" asp-for="Activity.Accessibility" />
             </div>
         </div>
     </div>
+</div>
+<div class="mt-3">
+    <h4>Query a Random Activity to Cure Your Boredom</h4>
+    <div class="col-12 mt-2">
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;">Activity</label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" readonly="readonly" style="background-color: darkgrey;" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;" title="Type of the activity"><u>Type</u></label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;"
+                    title="The number of people that this activity could involve"><u>Participants</u></label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;"
+                    title="A factor describing the cost of the event with zero being free"><u>Price</u></label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label class="form-control" style="width: 150px;"
+                    title="A factor describing how possible an event is to do with zero being the most accessible"><u>Accessibility</u></label>
+            </div>
+            <div class="col-11">
+                <input class="form-control" />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
 </div>
 
 <script type='text/javascript'>
