@@ -10,7 +10,7 @@ namespace DataCollector
 {
     public class DataCollector
     {
-        public static Models.Activity GetActivityFromURL()
+        public static Models.Activity GetRandomActivityFromURL()
         {
             DataCollectorTests.GetApiResponse_OK();
 
@@ -18,6 +18,58 @@ namespace DataCollector
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             string json = (new WebClient()).DownloadString("https://www.boredapi.com/api/activity");
             string cleanedJSON = json.Replace("key\"", "ID\"").Replace("activity\"", "Description\"");
+
+            return JsonConvert.DeserializeObject<Models.Activity>(cleanedJSON);
+        }
+
+        public static Models.Activity GetByIDActivityFromURL(int id)
+        {
+            DataCollectorTests.GetApiResponse_OK();
+
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            string json = (new WebClient()).DownloadString("https://www.boredapi.com/api/activity?key=" + id);
+            string cleanedJSON = json.Replace("key\"", "ID\"").Replace("activity\"", "Description\"");
+
+            return JsonConvert.DeserializeObject<Models.Activity>(cleanedJSON);
+        }
+
+        public static Models.Activity GetQueriedActivityFromURL(string type, int? participants, string price, string accessibility)
+        {
+            DataCollectorTests.GetApiResponse_OK();
+
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            string url = "https://www.boredapi.com/api/activity?";
+
+            if (!string.IsNullOrWhiteSpace(type))
+                url += "&type=" + type;
+            if (participants.HasValue)
+                url += "&participants=" + participants;
+            if (!string.IsNullOrWhiteSpace(price))
+            {
+                if (price == "Free")
+                    url += "&minprice=" + 0 + "&maxprice=" + 0;
+                else if (price == "Most likely cheap")
+                    url += "&minprice=" + 0.01 + "&maxprice=" + 0.2;
+                else if (price == "Approximately moderate")
+                    url += "&minprice=" + 0.21 + "&maxprice=" + 0.66;
+                else if (price == "Potentially expensive")
+                    url += "&minprice=" + 0.67 + "&maxprice=" + 1.0;
+            }
+            if (!string.IsNullOrWhiteSpace(accessibility))
+            {
+                if (accessibility == "Few to no challenges")
+                    url += "&minaccessibility=" + 0 + "&maxaccessibility=" + 0.3;
+                else if (accessibility == "Minor challenges")
+                    url += "&minaccessibility=" + 0.31 + "&maxaccessibility=" + 0.66;
+                else if (accessibility == "Major challenges")
+                    url += "&minaccessibility=" + 0.67 + "&maxaccessibility=" + 1.0;
+            }
+
+            string json = (new WebClient()).DownloadString(url);
+            string cleanedJSON = json.Replace("key\"", "ID\"").Replace("activity\"", "Description\"").Replace("?&", "?");
 
             return JsonConvert.DeserializeObject<Models.Activity>(cleanedJSON);
         }

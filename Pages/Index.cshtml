@@ -4,107 +4,152 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome!</h1>
-</div>
-<div class="mt-5">
-    <h4>Current Random Activity to Cure Your Boredom</h4>
-    <div class="col-12 mt-2">
-        <div class="row">
-            <div class="col-1">
-                <label class="form-control" style="width: 150px;">Activity</label>
+<form method="post" asp-page-handler="GetData" asp-route-id="@Model.Activity.ID">
+    <div class="text-center">
+        <h1 class="display-4">Welcome!</h1>
+    </div>
+    <div class="mt-5">
+        <h4>Current Random Activity to Cure Your Boredom</h4>
+        <div class="col-12 mt-2">
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;">Activity</label>
+                </div>
+                <div class="col-11">
+                    <input class="form-control" asp-for="Activity.Description" readonly="readonly"
+                        style="background-color: lightgrey;" />
+                </div>
             </div>
-            <div class="col-11">
-                <input class="form-control" asp-for="Activity.Description" />
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;" title="Type of the activity"><u>Type</u></label>
+                </div>
+                <div class="col-11">
+                    <input class="form-control" asp-for="Activity.Type" readonly="readonly"
+                        style="background-color: lightgrey;" />
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <label class="form-control" style="width: 150px;" title="Type of the activity"><u>Type</u></label>
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;"
+                        title="The number of people that this activity could involve"><u>Participants</u></label>
+                </div>
+                <div class="col-11">
+                    <input class="form-control" asp-for="Activity.Participants" readonly="readonly"
+                        style="background-color: lightgrey;" />
+                </div>
             </div>
-            <div class="col-11">
-                <input class="form-control" asp-for="Activity.Type" />
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;"
+                        title="A factor describing the cost of the event with zero being free"><u>Price</u></label>
+                </div>
+                <div class="col-11">
+                    <input class="form-control" asp-for="Activity.LongPrice" readonly="readonly"
+                        style="background-color: lightgrey;" />
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <label class="form-control" style="width: 150px;"
-                    title="The number of people that this activity could involve"><u>Participants</u></label>
-            </div>
-            <div class="col-11">
-                <input class="form-control" asp-for="Activity.Participants" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <label class="form-control" style="width: 150px;"
-                    title="A factor describing the cost of the event with zero being free"><u>Price</u></label>
-            </div>
-            <div class="col-11">
-                <input class="form-control" asp-for="Activity.Price" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <label class="form-control" style="width: 150px;"
-                    title="A factor describing how possible an event is to do with zero being the most accessible"><u>Accessibility</u></label>
-            </div>
-            <div class="col-11">
-                <input class="form-control" asp-for="Activity.Accessibility" />
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;"
+                        title="A factor describing how possible an event is to do with zero being the most accessible"><u>Accessibility</u></label>
+                </div>
+                <div class="col-11">
+                    <input class="form-control" asp-for="Activity.LongAccessibility" readonly="readonly"
+                        style="background-color: lightgrey;" />
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="mt-3">
-    <h4>Query a Random Activity to Cure Your Boredom</h4>
-    <div class="col-12 mt-2">
-        <div class="row">
-            <div class="col-1">
-                <label class="form-control" style="width: 150px;">Activity</label>
+    <div class="mt-3">
+        <h4>Query a Random Activity to Cure Your Boredom</h4>
+        <div class="col-12 mt-2">
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;">Activity</label>
+                </div>
+                <div class="col-11">
+                    <input class="form-control" readonly="readonly" style="background-color: lightgrey;"
+                        asp-for="ActivityQueried.Description" />
+                </div>
             </div>
-            <div class="col-11">
-                <input class="form-control" readonly="readonly" style="background-color: darkgrey;" />
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;" title="Type of the activity"><u>Type</u></label>
+                </div>
+                <div class="col-11">
+                    <select id="type" name="type" class="form-control" asp-for="ActivityQueried.Type">
+                        <option value=""></option>
+                        <option value="busywork">busywork</option>
+                        <option value="charity">charity</option>
+                        <option value="cooking">cooking</option>
+                        <option value="diy">diy</option>
+                        <option value="education">education</option>
+                        <option value="music">music</option>
+                        <option value="recreational">recreational</option>
+                        <option value="relaxation">relaxation</option>
+                        <option value="social">social</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;"
+                        title="The number of people that this activity could involve"><u>Participants</u></label>
+                </div>
+                <div class="col-11">
+                    <input id="participants" name="participants" class="form-control"
+                        asp-for="ActivityQueried.Participants" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;"
+                        title="A factor describing the cost of the event with zero being free"><u>Price</u></label>
+                </div>
+                <div class="col-11">
+                    <select id="price" name="price" class="form-control" asp-for="ActivityQueried.LongPrice">
+                        <option value=""></option>
+                        <option value="Free">Free</option>
+                        <option value="Most likely cheap">Most likely cheap</option>
+                        <option value="Approximately moderate">Approximately moderate</option>
+                        <option value="Potentially expensive">Potentially expensive</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-control" style="width: 150px;"
+                        title="A factor describing how possible an event is to do with zero being the most accessible"><u>Accessibility</u></label>
+                </div>
+                <div class="col-11">
+                    <select id="accessibility" name="accessibility" class="form-control"
+                        asp-for="ActivityQueried.LongAccessibility">
+                        <option value=""></option>
+                        <option value="Few to no challenges">Few to no challenges</option>
+                        <option value="Minor challenges">Minor challenges</option>
+                        <option value="Major challenges">Major challenges</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-1">
-                <label class="form-control" style="width: 150px;" title="Type of the activity"><u>Type</u></label>
+                <button type="submit" class="btn btn-primary" style="width: 100px;">Search</button>
             </div>
-            <div class="col-11">
-                <input class="form-control" />
-            </div>
-        </div>
-        <div class="row">
             <div class="col-1">
-                <label class="form-control" style="width: 150px;"
-                    title="The number of people that this activity could involve"><u>Participants</u></label>
-            </div>
-            <div class="col-11">
-                <input class="form-control" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <label class="form-control" style="width: 150px;"
-                    title="A factor describing the cost of the event with zero being free"><u>Price</u></label>
-            </div>
-            <div class="col-11">
-                <input class="form-control" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <label class="form-control" style="width: 150px;"
-                    title="A factor describing how possible an event is to do with zero being the most accessible"><u>Accessibility</u></label>
-            </div>
-            <div class="col-11">
-                <input class="form-control" />
+                <button type="button" class="btn btn-outline-primary ml-4" style="width: 100px;"
+                    onclick="clearQueryInputs()">Clear</button>
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-2">Search</button>
-</div>
+</form>
 
 <script type='text/javascript'>
-
+    function clearQueryInputs() {
+        document.getElementById('type').value = "";
+        document.getElementById('participants').value = "";
+        document.getElementById('price').value = "";
+        document.getElementById('accessibility').value = "";
+    }
 </script>
