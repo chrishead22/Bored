@@ -10,9 +10,15 @@ public class IndexModel : PageModel
     public Activity Activity { get; set; }
     public Activity ActivityQueried { get; set; }
 
+    public int Attempted { get; set; }
+    public int Completed { get; set; }
+
     public void OnGet()
     {
         Context context = new Context();
+        Attempted = context.Activities.Sum(x => x.Attempted);
+        Completed = context.Activities.Sum(x => x.Completed);
+
         Activity = DataCollector.DataCollector.GetRandomActivityFromURL();
     }
 

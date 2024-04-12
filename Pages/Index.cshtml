@@ -142,10 +142,40 @@
                     onclick="clearQueryInputs()">Clear</button>
             </div>
         </div>
+        <div class="row mt-2">
+            <canvas id="myChart" width="400" height="100"></canvas>
+        </div>
     </div>
 </form>
 
 <script type='text/javascript'>
+
+    var attemptedCount = @Html.Raw(Json.Serialize(@Model.Attempted));
+    var completedCount = @Html.Raw(Json.Serialize(@Model.Completed));
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Attempted', 'Completed'],
+            datasets: [{
+                label: 'Activity Counts',
+                data: [attemptedCount, completedCount],
+                backgroundColor: ['rgba(11,94,215,0.8)', 'rgba(11,94,215,0.8)'],
+                borderColor: ['rgba(11,94,215,0.8)', 'rgba(11,94,215,0.8)']
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
     function clearQueryInputs() {
         document.getElementById('type').value = "";
         document.getElementById('participants').value = "";
