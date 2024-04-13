@@ -73,5 +73,20 @@ namespace DataCollector
 
             return JsonConvert.DeserializeObject<Models.Activity>(cleanedJSON);
         }
+
+        public static void SaveActivity(string description, string type, int? participants, decimal price, decimal accessibility, bool isGood)
+        {
+            Context context = new Context();
+            Models.Activity activity = new Models.Activity();
+            context.Activities.Add(activity);
+            activity.Description = description;
+            activity.Type = type;
+            activity.Participants = participants.Value;
+            activity.Price = price;
+            activity.Accessibility = accessibility;
+            activity.Good = isGood;
+            activity.Bad = !isGood;
+            context.SaveChanges();
+        }
     }
 }

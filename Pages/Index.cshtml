@@ -16,8 +16,8 @@
                     <label class="form-control" style="width: 150px;">Activity</label>
                 </div>
                 <div class="col-11">
-                    <input class="form-control" asp-for="Activity.Description" readonly="readonly"
-                        style="background-color: lightgrey;" />
+                    <input id="description1" name="description1" class="form-control" asp-for="Activity.Description"
+                        readonly="readonly" style="background-color: lightgrey;" />
                 </div>
             </div>
             <div class="row">
@@ -25,7 +25,7 @@
                     <label class="form-control" style="width: 150px;" title="Type of the activity"><u>Type</u></label>
                 </div>
                 <div class="col-11">
-                    <input class="form-control" asp-for="Activity.Type" readonly="readonly"
+                    <input id="type1" name="type1" class="form-control" asp-for="Activity.Type" readonly="readonly"
                         style="background-color: lightgrey;" />
                 </div>
             </div>
@@ -35,8 +35,8 @@
                         title="The number of people that this activity could involve"><u>Participants</u></label>
                 </div>
                 <div class="col-11">
-                    <input class="form-control" asp-for="Activity.Participants" readonly="readonly"
-                        style="background-color: lightgrey;" />
+                    <input id="participants1" name="participants1" class="form-control" asp-for="Activity.Participants"
+                        readonly="readonly" style="background-color: lightgrey;" />
                 </div>
             </div>
             <div class="row">
@@ -47,6 +47,7 @@
                 <div class="col-11">
                     <input class="form-control" asp-for="Activity.LongPrice" readonly="readonly"
                         style="background-color: lightgrey;" />
+                    <input id="price1" name="price1" type="hidden" asp-for="Activity.Price" />
                 </div>
             </div>
             <div class="row">
@@ -57,6 +58,17 @@
                 <div class="col-11">
                     <input class="form-control" asp-for="Activity.LongAccessibility" readonly="readonly"
                         style="background-color: lightgrey;" />
+                    <input id="accessibility1" name="accessibility1" type="hidden" asp-for="Activity.Accessibility" />
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-2">
+                    <input type="radio" id="good1" name="rbl1" value="Good" onchange="this.form.submit()">
+                    <label for="good1">Good Activity</label>
+                </div>
+                <div class="col-2">
+                    <input type="radio" id="bad1" name="rbl1" value="Bad" onchange="this.form.submit()">
+                    <label for="bad1">Bad Activity</label>
                 </div>
             </div>
         </div>
@@ -69,8 +81,8 @@
                     <label class="form-control" style="width: 150px;">Activity</label>
                 </div>
                 <div class="col-11">
-                    <input class="form-control" readonly="readonly" style="background-color: lightgrey;"
-                        asp-for="ActivityQueried.Description" />
+                    <input id="description2" name="description2" class="form-control" readonly="readonly"
+                        style="background-color: lightgrey;" asp-for="ActivityQueried.Description" />
                 </div>
             </div>
             <div class="row">
@@ -78,7 +90,7 @@
                     <label class="form-control" style="width: 150px;" title="Type of the activity"><u>Type</u></label>
                 </div>
                 <div class="col-11">
-                    <select id="type" name="type" class="form-control" asp-for="ActivityQueried.Type">
+                    <select id="type2" name="type2" class="form-control" asp-for="ActivityQueried.Type">
                         <option value=""></option>
                         <option value="busywork">busywork</option>
                         <option value="charity">charity</option>
@@ -98,7 +110,7 @@
                         title="The number of people that this activity could involve"><u>Participants</u></label>
                 </div>
                 <div class="col-11">
-                    <input id="participants" name="participants" class="form-control"
+                    <input id="participants2" name="participants2" class="form-control"
                         asp-for="ActivityQueried.Participants" />
                 </div>
             </div>
@@ -108,13 +120,14 @@
                         title="A factor describing the cost of the event with zero being free"><u>Price</u></label>
                 </div>
                 <div class="col-11">
-                    <select id="price" name="price" class="form-control" asp-for="ActivityQueried.LongPrice">
+                    <select id="longPrice2" name="longPrice2" class="form-control" asp-for="ActivityQueried.LongPrice">
                         <option value=""></option>
                         <option value="Free">Free</option>
                         <option value="Most likely cheap">Most likely cheap</option>
                         <option value="Approximately moderate">Approximately moderate</option>
                         <option value="Potentially expensive">Potentially expensive</option>
                     </select>
+                    <input id="price2" name="price2" type="hidden" asp-for="ActivityQueried.Price" />
                 </div>
             </div>
             <div class="row">
@@ -123,13 +136,14 @@
                         title="A factor describing how possible an event is to do with zero being the most accessible"><u>Accessibility</u></label>
                 </div>
                 <div class="col-11">
-                    <select id="accessibility" name="accessibility" class="form-control"
+                    <select id="longAccessibility2" name="longAccessibility2" class="form-control"
                         asp-for="ActivityQueried.LongAccessibility">
                         <option value=""></option>
                         <option value="Few to no challenges">Few to no challenges</option>
                         <option value="Minor challenges">Minor challenges</option>
                         <option value="Major challenges">Major challenges</option>
                     </select>
+                    <input id="accessibility2" name="accessibility2" type="hidden" asp-for="ActivityQueried.Accessibility" />
                 </div>
             </div>
         </div>
@@ -143,26 +157,37 @@
             </div>
         </div>
         <div class="row mt-2">
-            <canvas id="myChart" width="400" height="100"></canvas>
+            <div class="col-2">
+                <input type="radio" id="good2" name="rbl2" value="Good" onchange="this.form.submit()">
+                <label for="good2">Good Activity</label>
+            </div>
+            <div class="col-2">
+                <input type="radio" id="bad2" name="rbl2" value="Bad" onchange="this.form.submit()">
+                <label for="bad2">Bad Activity</label>
+            </div>
         </div>
+    </div>
+    <div class="row mt-2">
+        <canvas id="myChart" width="400" height="100"></canvas>
+    </div>
     </div>
 </form>
 
 <script type='text/javascript'>
 
-    var attemptedCount = @Html.Raw(Json.Serialize(@Model.Attempted));
-    var completedCount = @Html.Raw(Json.Serialize(@Model.Completed));
+    var totalGoodCount = @Html.Raw(Json.Serialize(@Model.TotalGood));
+    var totalBadCount = @Html.Raw(Json.Serialize(@Model.TotalBad));
 
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Attempted', 'Completed'],
+            labels: ['Total Good Activities', 'Total Bad Activities'],
             datasets: [{
-                label: 'Activity Counts',
-                data: [attemptedCount, completedCount],
-                backgroundColor: ['rgba(11,94,215,0.8)', 'rgba(11,94,215,0.8)'],
-                borderColor: ['rgba(11,94,215,0.8)', 'rgba(11,94,215,0.8)']
+                label: 'Total Activity Counts',
+                data: [totalGoodCount, totalBadCount],
+                backgroundColor: ['rgba(40,167,69,0.8)', 'rgba(220,53,69,0.8)'],
+                borderColor: ['rgba(40,167,69,0.8)', 'rgba(220,53,69,0.8)']
             }]
         },
         options: {

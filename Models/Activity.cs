@@ -8,8 +8,8 @@ namespace Models
         public int Participants { get; set; }
         public decimal Price { get; set; }
         public decimal Accessibility { get; set; }
-        public int Attempted {get; set;}
-        public int Completed { get; set;}
+        public bool Good {get; set;}
+        public bool Bad { get; set;}
 
         public string LongAccessibility
         {
