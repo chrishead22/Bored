@@ -12,16 +12,20 @@ public class IndexModel : PageModel
 
     public int TotalGood { get; set; }
     public int TotalBad { get; set; }
+    public List<string> Types { get; set; }
+    public List<Activity> Activities { get; set; }
 
     public void OnGet()
     {
         TotalGood = DataAnalyzer.DataAnalyzer.GetGoodActivities();
         TotalBad = DataAnalyzer.DataAnalyzer.GetBadActivities();
+        Types = DataAnalyzer.DataAnalyzer.GetActivityTypes();
 
         Activity = DataCollector.DataCollector.GetRandomActivityFromURL();
+        Activities = new Context().Activities.ToList();
     }
 
-    public IActionResult OnPostGetData(int id)
+    public IActionResult OnPostDoStuff(int id)
     {
         //reload first random activity
         Activity = DataCollector.DataCollector.GetByIDActivityFromURL(id);
@@ -53,6 +57,8 @@ public class IndexModel : PageModel
         string longPrice2 = Request.Form["longPrice2"];
         string longAccessibility2 = Request.Form["longAccessibility2"];
 
+        ActivityQueried = DataCollector.DataCollector.GetQueriedActivityFromURL(type2, participants2, longPrice2, longAccessibility2);
+
         if (!string.IsNullOrWhiteSpace(Request.Form["rbl1"]))
         {
             bool isGood1 = Request.Form["rbl1"] == "Good" ? true : false;
@@ -63,11 +69,13 @@ public class IndexModel : PageModel
             bool isGood2 = Request.Form["rbl2"] == "Good" ? true : false;
             DataCollector.DataCollector.SaveActivity(description2, type2, participants2, price2, accessibility2, isGood2);
         }
-
-        ActivityQueried = DataCollector.DataCollector.GetQueriedActivityFromURL(type2, participants2, longPrice2, longAccessibility2);
+        else
+            DataCollector.DataCollector.SaveActivity(ActivityQueried.Description, ActivityQueried.Type, ActivityQueried.Participants, ActivityQueried.Price, ActivityQueried.Accessibility);
 
         TotalGood = DataAnalyzer.DataAnalyzer.GetGoodActivities();
         TotalBad = DataAnalyzer.DataAnalyzer.GetBadActivities();
+        Types = DataAnalyzer.DataAnalyzer.GetActivityTypes();
+        Activities = new Context().Activities.ToList();
 
         return Page();
     }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home page";
 }
 
-<form method="post" asp-page-handler="GetData" asp-route-id="@Model.Activity.ID">
+<form method="post" asp-page-handler="DoStuff" asp-route-id="@Model.Activity.ID">
     <div class="text-center">
         <h1 class="display-4">Welcome!</h1>
     </div>
@@ -143,7 +143,8 @@
                         <option value="Minor challenges">Minor challenges</option>
                         <option value="Major challenges">Major challenges</option>
                     </select>
-                    <input id="accessibility2" name="accessibility2" type="hidden" asp-for="ActivityQueried.Accessibility" />
+                    <input id="accessibility2" name="accessibility2" type="hidden"
+                        asp-for="ActivityQueried.Accessibility" />
                 </div>
             </div>
         </div>
@@ -151,9 +152,9 @@
             <div class="col-1">
                 <button type="submit" class="btn btn-primary" style="width: 100px;">Search</button>
             </div>
-            <div class="col-1">
-                <button type="button" class="btn btn-outline-primary ml-4" style="width: 100px;"
-                    onclick="clearQueryInputs()">Clear</button>
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-primary ml-4" style="width: 200px;"
+                    onclick="clearQueryInputs()">Clear Search Parameters</button>
             </div>
         </div>
         <div class="row mt-2">
@@ -168,8 +169,12 @@
         </div>
     </div>
     <div class="row mt-2">
-        <canvas id="myChart" width="400" height="100"></canvas>
+        <label class="form-control">Total Activity Good/Bad Counts</label>
+        <canvas class="mt-2" id="myChart1" width="400" height="100"></canvas>
     </div>
+    <div class="row mt-4">
+        <label class="form-control">Search By Type Count</label>
+        <canvas class="mt-2" id="myChart2" width="400" height="100"></canvas>
     </div>
 </form>
 
@@ -178,19 +183,74 @@
     var totalGoodCount = @Html.Raw(Json.Serialize(@Model.TotalGood));
     var totalBadCount = @Html.Raw(Json.Serialize(@Model.TotalBad));
 
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
+    var ctx1 = document.getElementById('myChart1').getContext('2d');
+    var myChart1 = new Chart(ctx1, {
         type: 'bar',
         data: {
             labels: ['Total Good Activities', 'Total Bad Activities'],
             datasets: [{
-                label: 'Total Activity Counts',
                 data: [totalGoodCount, totalBadCount],
                 backgroundColor: ['rgba(40,167,69,0.8)', 'rgba(220,53,69,0.8)'],
                 borderColor: ['rgba(40,167,69,0.8)', 'rgba(220,53,69,0.8)']
             }]
         },
         options: {
+            legend: {
+                display: false
+            },
+            plugins: {
+                title: {
+                    display: false
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var labels = @Html.Raw(Json.Serialize(@Model.Types));
+    var activities = @Html.Raw(Json.Serialize(@Model.Activities));
+
+    var data = [];
+    let colors = ['rgb(195, 252, 116,0.8)', 'rgb(59, 121, 130,0.8)', 'rgb(38, 59, 153,0.8)', 'rgb(155, 54, 145,0.8)', 'rgb(124, 226, 180,0.8)', 'rgb(158, 82, 122,0.8)', 'rgb(18, 11, 38,0.8)', 'rgb(90, 155, 252,0.8)', 'rgb(234, 7, 189,0.8)'];
+
+    for (var i = 0; i < labels.length; i++) {
+        var label = labels[i];
+        var count = 0;
+        for (var j = 0; j < activities.length; j++) {
+            activity = activities[j];
+            if (label == activity.type) {
+                count++;
+            }
+        }
+        data.push(count);
+    }
+
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: colors,
+                borderColor: colors
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            plugins: {
+                title: {
+                    display: false
+                }
+            },
             scales: {
                 yAxes: [{
                     ticks: {
