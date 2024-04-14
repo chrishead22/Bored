@@ -77,13 +77,19 @@ namespace DataCollector
         public static void SaveActivity(string description, string type, int? participants, decimal price, decimal accessibility, bool isGood)
         {
             Context context = new Context();
-            Models.Activity activity = new Models.Activity();
-            context.Activities.Add(activity);
-            activity.Description = description;
-            activity.Type = type;
-            activity.Participants = participants.Value;
-            activity.Price = price;
-            activity.Accessibility = accessibility;
+            Models.Activity activity = GetActivityByDescriptionAndType(description, type);
+
+            if (activity == null)
+            {
+                activity = new Models.Activity();
+                context.Activities.Add(activity);
+                activity.Description = description;
+                activity.Type = type;
+                activity.Participants = participants.Value;
+                activity.Price = price;
+                activity.Accessibility = accessibility;
+            }
+
             activity.Good = isGood;
             activity.Bad = !isGood;
             context.SaveChanges();
@@ -91,17 +97,27 @@ namespace DataCollector
 
         public static void SaveActivity(string description, string type, int? participants, decimal price, decimal accessibility)
         {
-            Context context = new Context();
-            Models.Activity activity = new Models.Activity();
-            context.Activities.Add(activity);
-            activity.Description = description;
-            activity.Type = type;
-            activity.Participants = participants.Value;
-            activity.Price = price;
-            activity.Accessibility = accessibility;
-            activity.Good = false;
-            activity.Bad = false;
-            context.SaveChanges();
+            Models.Activity activity = GetActivityByDescriptionAndType(description, type);
+
+            if (activity == null)
+            {
+                Context context = new Context();
+                activity = new Models.Activity();
+                context.Activities.Add(activity);
+                activity.Description = description;
+                activity.Type = type;
+                activity.Participants = participants.Value;
+                activity.Price = price;
+                activity.Accessibility = accessibility;
+                activity.Good = false;
+                activity.Bad = false;
+                context.SaveChanges();
+            }
+        }
+
+        public static Models.Activity GetActivityByDescriptionAndType(string description, string type)
+        {
+            return new Context().Activities.FirstOrDefault(x => x.Description == description && x.Type == type);
         }
     }
 }

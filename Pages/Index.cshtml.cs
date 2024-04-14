@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using RabbitMQ.Client;
 
 using Models;
 
@@ -23,6 +24,25 @@ public class IndexModel : PageModel
 
         Activity = DataCollector.DataCollector.GetRandomActivityFromURL();
         Activities = new Context().Activities.ToList();
+
+        runMessageQueue(Activity);
+    }
+
+    private void runMessageQueue(Models.Activity activity)
+    {
+        var factory = new ConnectionFactory
+            {
+                HostName = "localhost",
+                UserName = "chris",
+                Password = "password",
+                VirtualHost = "/"
+            };
+
+            using var connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
+
+            MessageQueue.DirectExchangePublisher.Publish(channel, activity);
+            MessageQueue.DirectExchangeConsumer.Consume(channel, activity);
     }
 
     public IActionResult OnPostDoStuff(int id)

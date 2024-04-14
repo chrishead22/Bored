@@ -13,4 +13,8 @@ Using C#/ASP.NET Core v8.0.X
 - Monitoring and Reporting Azure Service Snap Shots:
 
 
-![alt text](image.png)
+![alt text](Monitoring.png)
+
+- Direct Message Queue done with RabbitMQ. Producer will tell consumer to add record to database if the record does not exist.
+
+![alt text](MessageQueue.png)
