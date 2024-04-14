@@ -25,34 +25,19 @@ public class IndexModel : PageModel
         Activity = DataCollector.DataCollector.GetRandomActivityFromURL();
         Activities = new Context().Activities.ToList();
 
-        runMessageQueue(Activity);
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            runMessageQueue(Activity);
     }
 
     private void runMessageQueue(Models.Activity activity)
     {
-        string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-        ConnectionFactory factory = new ConnectionFactory();
-
-        if (environment == "Development")
+        ConnectionFactory factory = new ConnectionFactory
         {
-            factory = new ConnectionFactory
-            {
-                HostName = "localhost",
-                UserName = "chris",
-                Password = "password",
-                VirtualHost = "/"
-            };
-        }
-        else
-        {
-            factory = new ConnectionFactory
-            {
-                HostName = "https://bored-5028.azurewebsites.net/",
-                UserName = "chris",
-                Password = "password",
-                VirtualHost = "/"
-            };
-        }
+            HostName = "localhost",
+            UserName = "chris",
+            Password = "password",
+            VirtualHost = "/"
+        };
 
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
