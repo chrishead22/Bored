@@ -7,6 +7,7 @@ Using C#/ASP.NET Core v8.0.X
 - Production Site: https://bored-5028.azurewebsites.net/
 - REST API being utilized: https://www.boredapi.com/
 - Unit testing done with xUnit.net
+- Mocking done with Moq
 - CI/CD defined in Bored.yaml and deployed to Azure via GitHub Actions
 - SQL Server Database hosted on Azure
 - Charting done with Chart.js

@@ -119,5 +119,10 @@ namespace DataCollector
         {
             return new Context().Activities.FirstOrDefault(x => x.Description == description && x.Type == type);
         }
+
+        public static List<Models.Activity> GetActivities()
+        {
+            return new Context().Activities.ToList();
+        }
     }
 }
